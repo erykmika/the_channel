@@ -1,0 +1,7 @@
+<form action="/logout/" method="post">
+    {% csrf_token %}
+    {{ logout_form }}
+    <input type="submit" value="Log out">
+</form>
+
+<h1>Hello world!</h1>

@@ -2,3 +2,4 @@
 *.bak
 .venv
 *.sqlite3
+*.pyc
