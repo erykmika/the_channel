@@ -3,13 +3,13 @@
 A real-time chat web app.
 
 ## Tech stack
-| Technology | Usage                                                        |
-|------------|--------------------------------------------------------------|
-| Python     | Core scripting language used in the project                  |
-| Django     | Web development framework used to create the main app        |
-| Celery     | Task queue used to process asynchronous message delivery     |
-| PostgreSQL | Relational database used for storing users and messages data |
-| Redis      | In-memory message broker used by Celery                      |
+| Technology      | Usage                                                        |
+|-----------------|--------------------------------------------------------------|
+| Python          | Core scripting language used in the project                  |
+| Django          | Web development framework used to create the main app        |
+| Django Channels | Django library used to process asynchronous message delivery |
+| PostgreSQL      | Relational database used for storing users and messages data |
+| Redis           | In-memory message broker used by Celery                      |
 
 
 ## Features
