@@ -1,6 +1,7 @@
 from typing import Any
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import TemplateView
 
@@ -17,7 +18,15 @@ class DashboardView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context["logout_form"] = LogoutForm()
+        context["users"] = self.get_users_data()
         return context
+
+    def get_users_data(self) -> list[dict]:
+        users = User.objects.all()
+        users_data = []
+        for user in users:
+            users_data.append({"name": user.username})
+        return users_data
 
 
 class SignOutView(LogoutView):
