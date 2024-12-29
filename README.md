@@ -9,7 +9,7 @@ A real-time chat web app.
 | Django          | Web development framework used to create the main app        |
 | Django Channels | Django library used to process asynchronous message delivery |
 | PostgreSQL      | Relational database used for storing users and messages data |
-| Redis           | In-memory message broker used by Celery                      |
+| Redis           | In-memory message broker                                     |
 
 
 ## Features
