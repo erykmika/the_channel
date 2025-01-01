@@ -18,11 +18,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from channel.views import DashboardView, SignInView, SignOutView
+from channel.views import DashboardView, RoomView, SignInView, SignOutView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("login/", SignInView.as_view()),
     path("logout/", SignOutView.as_view()),
     path("dashboard/", DashboardView.as_view()),
+    path("chat/<str:first>/<str:second>/", RoomView.as_view()),
 ]

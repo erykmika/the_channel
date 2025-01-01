@@ -25,9 +25,24 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         users = User.objects.all()
         users_data = []
         for user in users:
-            users_data.append({"name": user.username})
+            users_data.append(
+                {
+                    "name": user.username,
+                    "link": f"/chat/{self.request.user.username}/{user.username}/",
+                }
+            )
         return users_data
 
 
 class SignOutView(LogoutView):
     template_name = "logout.html"
+
+
+class RoomView(TemplateView):
+    template_name = "room.html"
+
+    def get_context_data(self, **kwargs) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["first_user"] = kwargs.get("first")
+        context["second_user"] = kwargs.get("second")
+        return context

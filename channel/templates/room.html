@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Conversation</h2>
+    <div class="chat-container">
+        <div>
+            <h3 id="first_person">{{ first_user }}</h3>
+            <h3 id="second_person">{{ second_user }}</h3>
+        </div>
+        <div>
+            <label for="chat-log">Chat log</label><textarea id="chat-log">
+            </textarea>
+        </div>
+        <div>
+            <label for="chat-input">Enter message</label><input id="chat-input" placeholder="Your message">
+            <button id="chat-input-submit">Send</button>
+        </div>
+    </div>
+    <script>
+        const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/chat/'
+            + document.getElementById("first_person").textContent
+            + '/'
+            + document.getElementById("second_person").textContent
+        );
+
+        let chat_log = document.getElementById("chat-log").innerText;
+
+        chatSocket.onmessage = (e) => {
+            const data = JSON.parse(e.data);
+            chat_log += data + "\n";
+        };
+
+        chatSocket.onclose = (e) => {
+            chat_log += "Connection lost!" + String(e) + "\n";
+        };
+
+        let chat_input_value = document.getElementById("chat-input").textContent;
+
+        document.getElementById("chat-input-submit").onclick = (e) => {
+            if (!chat_input_value) {
+                return;
+            }
+            chatSocket.send(chat_input_value);
+            chat_input_value = "";
+        };
+
+    </script>
+{% endblock %}

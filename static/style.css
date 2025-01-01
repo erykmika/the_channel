@@ -81,3 +81,10 @@ a {
     flex-direction: row;
     align-items: center;
 }
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    row-gap: 32px;
+}
