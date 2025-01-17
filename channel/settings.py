@@ -67,8 +67,8 @@ TEMPLATES = [
     },
 ]
 
-ASGI_APPLICATION = "channel.asgi.application"
-WSGI_APPLICATION = "channel.wsgi.application"
+WSGI_APPLICATION = "wsgi.application"
+ASGI_APPLICATION = "asgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
