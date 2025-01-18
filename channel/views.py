@@ -38,7 +38,7 @@ class SignOutView(LogoutView):
     template_name = "logout.html"
 
 
-class RoomView(TemplateView):
+class RoomView(LoginRequiredMixin, TemplateView):
     template_name = "room.html"
 
     def get_context_data(self, **kwargs) -> dict[str, Any]:

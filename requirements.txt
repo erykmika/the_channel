@@ -9,6 +9,7 @@ black==24.10.0
 celery==5.4.0
 cffi==1.17.1
 channels==4.2.0
+channels_redis==4.2.1
 click==8.1.8
 click-didyoumean==0.3.1
 click-plugins==1.1.1
@@ -22,6 +23,7 @@ idna==3.10
 incremental==24.7.2
 isort==5.13.2
 kombu==5.4.2
+msgpack==1.1.0
 mypy-extensions==1.0.0
 packaging==24.2
 pathspec==0.12.1

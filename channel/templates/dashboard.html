@@ -6,8 +6,7 @@
         <ul class="chat-index-list">
             {% for user in users %}
                 <li class="chat-index-element">
-                    <span>{{ user.name }}</span>
-                    <a href="{{ user.link }}">Go to chat</a>
+                    <a href="{{ user.link }}">{{ user.name }}</a>
                 </li>
             {% endfor %}
         </ul>
