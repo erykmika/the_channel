@@ -1,15 +1,23 @@
 from typing import Any
 
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, LogoutView
-from django.views.generic import TemplateView
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, TemplateView
 
 from channel.forms import LogoutForm
 
 
 class SignInView(LoginView):
     template_name = "signin.html"
+
+
+class SignUpView(CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy("signin")
+    template_name = "signup.html"
 
 
 class DashboardView(LoginRequiredMixin, TemplateView):

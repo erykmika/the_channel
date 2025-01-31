@@ -10,9 +10,7 @@ logging.basicConfig(level=logging.INFO)
 
 class ChatConsumer(WebsocketConsumer):
 
-    def __init__(
-        self, logger: logging.Logger = getLogger(__name__), *args, **kwargs
-    ) -> None:
+    def __init__(self, logger: logging.Logger = getLogger(__name__), *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self._logger = logger
         self._room_name = None
@@ -29,18 +27,14 @@ class ChatConsumer(WebsocketConsumer):
         self.accept()
 
     def disconnect(self, close_code) -> None:
-        async_to_sync(self.channel_layer.group_discard)(
-            self._room_name, self.channel_name
-        )
+        async_to_sync(self.channel_layer.group_discard)(self._room_name, self.channel_name)
 
     def receive(self, text_data: str, **kwargs) -> None:
         message = json.loads(text_data)["message"]
         message_user = self.scope["user"].username
         message = f"[{message_user}] : {message}"
         self._logger.info(f"Received: {message}")
-        async_to_sync(self.channel_layer.group_send)(
-            self._room_name, {"type": "chat.message", "message": message}
-        )
+        async_to_sync(self.channel_layer.group_send)(self._room_name, {"type": "chat.message", "message": message})
 
     def chat_message(self, event) -> None:
         self._logger.info(f"Received chat message event: {event}")
