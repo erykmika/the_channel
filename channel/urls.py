@@ -21,6 +21,7 @@ from django.urls import path
 from channel.views import DashboardView, RoomView, SignInView, SignOutView, SignUpView
 
 urlpatterns = [
+    path("", DashboardView.as_view()),
     path("admin/", admin.site.urls),
     path("login/", SignInView.as_view()),
     path("register/", SignUpView.as_view()),
