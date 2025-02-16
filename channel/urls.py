@@ -23,8 +23,8 @@ from channel.views import DashboardView, RoomView, SignInView, SignOutView, Sign
 urlpatterns = [
     path("", DashboardView.as_view()),
     path("admin/", admin.site.urls),
-    path("login/", SignInView.as_view()),
-    path("register/", SignUpView.as_view()),
+    path("login/", SignInView.as_view(), name="login"),
+    path("register/", SignUpView.as_view(), name="register"),
     path("logout/", SignOutView.as_view()),
     path("dashboard/", DashboardView.as_view()),
     path("chat/<str:first>/<str:second>/", RoomView.as_view()),
