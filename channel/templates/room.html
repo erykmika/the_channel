@@ -9,8 +9,7 @@
         </div>
         <div>
             <label for="chat-log">Chat log</label>
-            <textarea id="chat-log" readonly>
-            </textarea>
+            <textarea id="chat-log" readonly></textarea>
         </div>
         <div>
             <label for="chat-input">Enter message</label>
@@ -37,13 +36,13 @@
         };
 
         chatSocket.onclose = (e) => {
-            chatLog.value += "Connection lost!" + String(e) + "\n";
+            chatLog.value += "Connection lost!";
         };
 
         const chatInput = document.getElementById("chat-input");
+        const chatInputSubmit = document.getElementById("chat-input-submit");
 
-        document.getElementById("chat-input-submit").onclick = (e) => {
-            console.log("Clicked!" + chatInput.length);
+        chatInputSubmit.onclick = (e) => {
             if (!chatInput) {
                 return;
             }
@@ -51,9 +50,14 @@
                 "message": chatInput.value
             };
             chatSocket.send(JSON.stringify(sentMessage));
-            console.log("Sent!");
             chatInput.value = "";
         };
+
+        chatInput.addEventListener("keyup", event => {
+            if (event.key !== "Enter") return;
+            chatInputSubmit.click();
+            event.preventDefault();
+        });
 
     </script>
 {% endblock %}
