@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,10 +20,10 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-al0rau=q@tzn!mc_@wg(0-^gdzk13b+7u_!qrm4@i_g1butb1%"
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "test")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", False)
 
 ALLOWED_HOSTS = []
 
@@ -67,8 +67,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "wsgi.application"
-ASGI_APPLICATION = "asgi.application"
+WSGI_APPLICATION = "channel.wsgi.application"
 
 # Redis Django Channels configuration
 CHANNEL_LAYERS = {
@@ -85,12 +84,13 @@ CHANNEL_LAYERS = {
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "the_channel",
-        "USER": "postgres",
-        "PASSWORD": "123",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+        "ENGINE": os.getenv("DATABASE_ENGINE", ""),
+        "NAME": os.getenv("DATABASE_NAME", ""),
+        "USER": os.getenv("DATABASE_USERNAME", ""),
+        "PASSWORD": os.getenv("DATABASE_PASSWORD", ""),
+        "HOST": os.getenv("DATABASE_HOST", ""),
+        "PORT": os.getenv("DATABASE_PORT", ""),
+        "CONN_HEALTH_CHECKS": True
     }
 }
 
@@ -135,3 +135,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL = "/dashboard/"
 LOGIN_URL = "/login/"
+
+ASGI_APPLICATION = "channel.asgi.application"
