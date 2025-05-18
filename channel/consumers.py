@@ -9,7 +9,6 @@ logging.basicConfig(level=logging.INFO)
 
 
 class ChatConsumer(WebsocketConsumer):
-
     def __init__(self, logger: logging.Logger = getLogger(__name__), *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self._logger = logger

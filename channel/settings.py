@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+
 import os
 from pathlib import Path
 
@@ -82,6 +83,8 @@ CHANNEL_LAYERS = {
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+import sys
+
 DATABASES = {
     "default": {
         "ENGINE": os.getenv("DATABASE_ENGINE", ""),
@@ -90,9 +93,14 @@ DATABASES = {
         "PASSWORD": os.getenv("DATABASE_PASSWORD", ""),
         "HOST": os.getenv("DATABASE_HOST", ""),
         "PORT": os.getenv("DATABASE_PORT", ""),
-        "CONN_HEALTH_CHECKS": True
+        "CONN_HEALTH_CHECKS": True,
     }
 }
+if "test" in sys.argv:
+    DATABASES["default"] = {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": ":memory:",
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
