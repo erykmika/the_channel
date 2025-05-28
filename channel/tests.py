@@ -36,7 +36,7 @@ class RoomViewTest(TestCase):
         response = self.client.get(self.url)
         self.assertTemplateUsed(response, "room.html")
 
-    # def test_room_view_context_data(self):
-    #     response = self.client.get(self.url)
-    #     self.assertEqual(response.context["first_user"], "testuser")
-    #     self.assertEqual(response.context["second_user"], "otheruser")
+    def test_room_view_context_data(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.context["first_user"], "testuser")
+        self.assertEqual(response.context["second_user"], "otheruser")
