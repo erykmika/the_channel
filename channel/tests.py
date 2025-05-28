@@ -8,7 +8,7 @@ class DashboardViewTest(TestCase):
         user = User.objects.create(username="testuser")
         user.set_password("12345")
         user.save()
-        self.client.login(username="testuser", password="12345")
+        self.client.login(username="testuser", password="1234")
         self.url = reverse("dashboard")
 
     def test_dashboard_view_status_code(self):
