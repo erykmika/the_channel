@@ -22,6 +22,6 @@ COPY . /app/
 
 EXPOSE 8000
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod u+x /entrypoint.sh
-CMD ["/entrypoint.sh"]
+COPY entrypoint.sh ./entrypoint.sh
+RUN chmod u+x ./entrypoint.sh
+CMD ["./entrypoint.sh"]
