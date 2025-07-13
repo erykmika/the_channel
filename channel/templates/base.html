@@ -16,7 +16,6 @@
     </div>
     <form action="/logout/" method="post">
         {% csrf_token %}
-        {{ logout_form }}
         <input type="submit" class="navbar-btn" value="Log out">
     </form>
 </div>

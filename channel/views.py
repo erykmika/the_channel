@@ -7,8 +7,6 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, TemplateView
 
-from channel.forms import LogoutForm
-
 
 class SignInView(LoginView):
     template_name = "signin.html"
@@ -25,7 +23,6 @@ class DashboardView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context["logout_form"] = LogoutForm()
         context["users"] = self.get_users_data()
         return context
 
